@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shopping-cart</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+<%if (products != null){%>
+<%include header%>
+<div class = "row">
+	<div class = col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3>
+		<ul class = "list-group">
+		<% products.forEach(function(p){ %>
+			<li class = "list-group-item">
+				<span class ="badge"><%=p.qty%></span>
+				<strong><%=p.item.title%></strong>
+				<span class = "label label-success"><%=p.price%></span>
+				<div class ="btn btn-primary btn-xs dropdown-toggle" type="button">Action<span class ="caret"></span>
+				<ul class ="dropdown-menu">
+					<li><a href="#">Reduce by 1</a></li>
+					<li><a href="#">Reduce all</a></li>
+				</ul>
+				</div>
+			</li>
+			
+		<%})%>
+		</ul>
+	</div>
+</div>
+<div class ="row">
+	<div class = "col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+		<strong>Total: <%=totalPrice%></strong>
+	</div>
+</div>
+<div class ="row">
+	<div class = "col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+		<a href = "/user/checkout" type="button" class ="btn btn-success">Checkout</a>
+	</div>
+</div>
+<%}else{%>
+<div class ="row">
+	<div class = "col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+		<h2>No item in Cart</h2>
+	</div>
+</div>
+<%}%>
+</body>
+</html>

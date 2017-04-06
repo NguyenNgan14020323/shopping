@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title><%=title%></title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<style type="text/css" media="screen">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+.container{
+  margin:50px;
+}
+.thumbnail img {
+  height:250px;
+}
+</style>
+
+</head>
+<body>
+<%if (products != null){%>
+<% include header %>
+<%}%>
+<div class="container">
+<div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header" style="background-color: #000000; color:#ffffff;">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modal Header</h4>
+          </div>
+          <div class="modal-body">
+           <form action="/upload/loadedit" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+            <label>title</label>
+            <input type="hidden" name="pro_id" id ="chan0">
+            <input type="text" class="form-control" name="title" id="chan1">
+        </div>
+        <div class="form-group">
+            <label>Hinh anh</label>   
+            <input type="file"  name="file" id="chan2">       
+        </div>
+        <div class="form-group">
+            <label>description</label>
+            <textarea name="description"  style="width: 100%; min-height: 80px; resize: none; padding: 8px;" class="form-control" id="chan3"></textarea>
+        </div>
+          <div class="form-group">
+            <label>price</label>
+            <input type="number" name="price" class="form-control" id="chan4">
+        </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success" >Edit</button>
+
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+</div>
+<% var stt=1; %>
+<% products.forEach(function(pr){ %>
+    <div class="row">
+    <% pr.forEach(function(p){ %>
+      <div class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                <input type="hidden" value="<%= p._id %>" id="<%=stt%>">
+                <div class="dropdown" style="margin: 15px; float: right">
+                  <a href=""  id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="caret"></span>
+                </a> 
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="min-width: 0">
+                 <li><a href=""   data-toggle="modal" data-target="#myModal" onclick="calledit(<%=stt%>)"><span class="fa fa-edit"></span>Edit</a></li>
+                  <li><a onclick="calldelete(<%=stt++%>)" style="cursor: pointer;"><span class="fa fa-bin" ></span>Delete</a></li>
+                  </ul>
+                </div>
+              
+             <br>
+                <br>
+                <img src="<%= p.imagePath %>" alt="" class="img-responsive" >
+                <div class="caption">
+                  <h3><%= p.title %></h3>
+                  <p class="description"><%= p.description %></p>
+                  <div class="clearfix">
+                      <div class="price pull-left">$ <%= p.price %></div>
+                      <a href="http://localhost:5000/user/add-to-cart/<%= p._id %>" class="btn btn-success pull-right" role="button">Add to Shopping Cart</a>
+                  </div>
+                </div>
+              </div>
+      </div>
+      <% }); %>
+  </div>
+<% }); %>
+</div>
+
+<script type="text/javascript">
+  function calledit(stt){
+    var id = document.getElementById(stt).value;
+    $.ajax({
+      url:'http://localhost:5000/upload/edit',
+      type:'POST',
+      data:{pro_id:id},
+      success:function(data){
+        hu = JSON.parse(data);
+         document.getElementById('chan0').value =hu._id;
+        document.getElementById('chan1').value = hu.title;
+        document.getElementById('chan2').value = hu.imagePath;
+        document.getElementById('chan3').value = hu.description;
+        document.getElementById('chan4').value = hu.price;
+      }
+    })
+  }
+  function call(){
+    $.ajax({
+      url:'http://localhost:5000/upload/loadedit',
+      type:'POST',
+       async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+      data:{
+        pro_id : $('#chan0').val(),
+        title: $('#chan1').val(),
+        imagePath: $('#chan2').val(),
+        description: $('#chan3').val(),
+        price: $('#chan4').val()
+      },
+      success:function(data){
+        location.reload();
+      }
+    })
+  }
+  function calldelete(stt){
+    var retVal = confirm("Do you want to delete ?");
+    if( retVal == true ){
+    var id = document.getElementById(stt).value;
+    $.ajax({
+      url:'http://localhost:5000/upload/delete',
+      type:'POST',
+      data:{pro_id:id},
+      success:function(data){
+        location.reload();
+      }
+    })
+  }else{
+    location.reload();
+  }
+  }
+</script>
+<script src="http://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</body>
+</html>

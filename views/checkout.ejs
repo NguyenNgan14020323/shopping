@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Checkout</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<div class="row">
+	<div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+		<h1>Checkout</h1>
+		<h4 id ="total">Your Total: <%=total%></h4>
+			<div class="col-xs-12">
+			<form action="/user/checkout" method="POST">
+				<div class="form-group">
+					<label for="name">Name</label>
+					<input type="text" id="name" class="form-control" required>
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="form-group">
+					<label for="address">Address</label>
+					<input type="text" name="address" class="form-control" required>
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="form-group">
+					<label for="card-name">Card Holder Name</label>
+					<input type="text" name="cardname" class="form-control" required>
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="form-group">
+					<label for="card-number">Credit Card Number</label>
+					<input type="text" name="cardnumber" class="form-control" required>
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="col-xs-6">
+					<div class="form-group">
+					<label for="card-expiry-month">Expiration Month</label>
+					<input type="text" name="month" class="form-control" required>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+					<label for="card-expiry-year">Expiration Year</label>
+					<input type="text" name="year" class="form-control" required>
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="form-group">
+					<label for="card-cvc">CVC</label>
+					<input type="text" name="cardcvc" class="form-control" required>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-success">Buy now</button>
+			<form>
+	</div>
+</div>
+<script type="text/javascript">
+	// function load(){
+	// 	alert($('#total').val());
+	// 	$.ajax({
+	// 		url: 'http://localhost:5000/user/checkout',
+	// 		type: 'POST',
+	// 		data: {
+	// 			total: $('#total').val(),
+	// 			name: $('#name').val(),
+	// 			address: $('#address').val(),
+	// 			cardname: $('#card-name').val(),
+	// 			cardnumber: $('#card-number').val(),
+	// 			month: $('#card-expiry-month').val(),
+	// 			year: $('#card-expiry-year').val(),
+	// 			cardcvc: $('#card-cvc').val()
+	// 		},
+	// 		success:function(data){
+	// 			location.reload();
+	// 		}
+	// 	})
+	// }
+</script>
+</body>
+</html>

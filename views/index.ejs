@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel='stylesheet' href='/css/style.css' />
+</head>
+<body>
+<% include header %>
+
+<div class="container">
+
+<div class="col-md-4 col-md-offset-4">
+    <h1>Cập nhật dữ liệu</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label>title</label>
+            <input type="text" class="form-control" name="title">
+        </div>
+        <div class="form-group">
+            <label>Hinh anh</label>   
+            <input type="file"  name="file">       
+        </div>
+        <div class="form-group">
+            <label>description</label>
+            <textarea name="description" style="width: 100%; min-height: 80px; resize: none; padding: 8px;" class="form-control"></textarea>
+        </div>
+          <div class="form-group">
+            <label>price</label>
+            <input type="number" name="price" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-success pull-right">Dang</button>
+    </form>
+</div>
+</div>
+<script src="http://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</body>
+</html>
